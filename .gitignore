@@ -4,6 +4,8 @@
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
+/client/.gitignore
+/client/.vscode
 
 /client/# testing
 /client//coverage

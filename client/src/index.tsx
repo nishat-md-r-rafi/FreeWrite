@@ -5,11 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
+import Single from './pages/single/Single';
 
-const router = createBrowserRouter([{
+const router = createBrowserRouter([
+  {
   path: '/',
   element: <Home/>,
-}]);
+  },
+  {
+  path: '/single',
+  element: <Single/>,
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
