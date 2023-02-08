@@ -13,42 +13,10 @@ export default function SinglePost() {
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
 
-  // useEffect(() => {
-  //   const getPost = async () => {
-  //     const res = await axios.get("/posts/" + path);
-  //     setPost(res.data);
-  //     setTitle(res.data.title);
-  //     setDesc(res.data.desc);
-  //   };
-  //   getPost();
-  // }, [path]);
-
-  // const handleDelete = async () => {
-  //   try {
-  //     await axios.delete(`/posts/${post._id}`, {
-  //       data: { username: user.username },
-  //     });
-  //     window.location.replace("/");
-  //   } catch (err) {}
-  // };
-
-  // const handleUpdate = async () => {
-  //   try {
-  //     await axios.put(`/posts/${post._id}`, {
-  //       username: user.username,
-  //       title,
-  //       desc,
-  //     });
-  //     setUpdateMode(false)
-  //   } catch (err) {}
-  // };
-
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        {/* {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
-          )} */}
+        
         <img src="https://images.pexels.com/photos/12509001/pexels-photo-12509001.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="singlePostImg" />
         
         {updateMode ? (
@@ -64,10 +32,7 @@ export default function SinglePost() {
             Free Time
             
             <div className="singlePostEdit">
-                <i
-                  className="singlePostIcon far fa-edit"
-                 
-                ></i>
+                <i className="singlePostIcon far fa-edit"></i>
                 <i
                   className="singlePostIcon far fa-trash-alt"
                 ></i>

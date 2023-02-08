@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Single from './pages/single/Single';
+import TopBar from './components/topbar/TopBar';
 
 const router = createBrowserRouter([
   {
