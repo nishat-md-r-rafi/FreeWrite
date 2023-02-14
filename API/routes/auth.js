@@ -24,39 +24,69 @@ router.post('/register', async (req, res) => {
     }
 })
 
+const verify = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, "mySecretKey", (err, user) => {
+      if (err) {
+        return res.status(403).json("Token is not valid!");
+      }
+
+      req.user = user;
+      next();
+    });
+  } else {
+    res.status(401).json("You are not authenticated!");
+  }
+};
+
 
 let refreshTokens = [];
-router.post('/refresh', (req, res) => {
-    const refreshToken = req.body.token;
-
-    if (!refreshToken) return res.status(401).send("you r not authenticated!!");
-
-})
 
 // LOGIN
 router.post('/login', async (req, res) => {
     const {username, password} = req.body;
-    const user = await User.find()
+    try{
+      const user = await User.findOne({username: username, password: password});
+      if(user){
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);
+        refreshTokens.push(refreshToken);
+
+        res.json({user: user.username, isAdmin: user.isAdmin, accessToken: accessToken, refreshToken: refreshToken});
+      }
+
+    } catch(e){res.status(404).send("User not found!!")}
 })
 
+// REFRESH
+router.post('/refresh', (req, res) => {
+  const refreshToken = req.body.token;
 
-const verify = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const token = authHeader.split(" ")[1];
-  
-      jwt.verify(token, "mySecretKey", (err, user) => {
-        if (err) {
-          return res.status(403).json("Token is not valid!");
-        }
-  
-        req.user = user;
-        next();
-      });
-    } else {
-      res.status(401).json("You are not authenticated!");
-    }
-  };
+  if (!refreshToken) return res.status(401).send("you r not authenticated!!");
+  if (!refreshTokens.includes(refreshToken)) return res.status(401);
+
+
+  // VERIFY REFRESH TOKEN AND SEND A NEW TOKEN
+
+  jwt.verify(refreshToken, "RefreshToken", (err, user) => {
+    err && console.log(err);
+    refreshTokens = refreshTokens.filter(token => token !== refreshToken);
+
+    const newAccessToken = generateAccessToken(user);
+    const newRefreshToken = generateRefreshToken(user);
+
+    refreshTokens.push(newRefreshToken);
+
+    res.json({
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken
+    })
+  })
+
+})
 
 // LOGOUT
 
