@@ -89,6 +89,10 @@ router.post('/refresh', (req, res) => {
 })
 
 // LOGOUT
+router.post('/logout', (req, res) => {
+  refreshTokens = refreshTokens.filter(token => token!==req.body.token)
+  res.send("User is now logged out!!")
+})
 
 // DELETE
 router.delete("/api/users/:userId", verify, async (req, res) => {
