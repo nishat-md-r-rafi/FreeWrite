@@ -13,7 +13,7 @@ mongoose.connect(process.env.URL)
                     .then(()=>{console.log("MongoDB is connected")})
                     .catch((err) => {console.log(err)})
 
-
+app.use(express.json())
 app.use('/api/auth', auth)
 app.listen(PORT, ()=>{
     console.log('listening on port', PORT);
