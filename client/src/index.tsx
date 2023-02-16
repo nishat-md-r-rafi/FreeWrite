@@ -7,6 +7,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import TopBar from './components/topbar/TopBar';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 
