@@ -5,7 +5,7 @@ const INITIAL_STATE = [];
 const  contentReducer = (state=INITIAL_STATE, action) => {
     switch (action.type){
         case LOAD_CONTENT:
-            return [...state];
+            return [action.payload];
 
         case ADD_CONTENT:
             return [...state, action.payload];

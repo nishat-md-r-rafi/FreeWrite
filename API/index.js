@@ -5,6 +5,7 @@ const auth = require('./routes/auth')
 const post = require('./routes/posts')
 const category = require('./routes/category')
 const user = require('./routes/user')
+const cors = require('cors')
 
 dotenv.config()
 const app = express();
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
     res.send("Blogging API is connected!!")
 })
 
+
+app.use(cors())
 app.use(express.json())
 app.use('/api/auth', auth)
 app.use('/api/post', post)
