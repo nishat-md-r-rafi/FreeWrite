@@ -1,28 +1,40 @@
 import "./post.css";
 import { Link } from "react-router-dom";
 
-export default function Post() {
+interface PostProps{
+  _id: string;
+  title: string,
+  desc: string,
+  photo: string,
+  username: string,
+  categories: string[],
+  createdAt: string,
+  updatedAt: string
+}
+
+export default function Post(props: PostProps) {
+  console.log(props)
   const PF = "http://localhost:5000/images/";
   return (
     <div className="post">
       {/* {post.photo && <img className="postImg" src={PF + post.photo} alt="" />} */}
-      <img className="postImg" src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
+      <img className="postImg" src={props.photo} alt="" />
       <div className="postInfo">
         <div className="postCats">
-          {/* {post.categories.map((c) => (
-          ))} */}
-          <span className="postCat">Hello</span>
-          <span className="postCat">Gello</span>
+          {props.categories.map((c) => (
+          <span className="postCat">{c}</span>
+          ))}
         </div>
-        {/* <Link to={`/post/${post._id}`} className="link">
-        </Link> */}
-          <span className="postTitle">title</span>
+        <Link to={`/post/${props._id}`} className="link">
+          <span className="postTitle">{props.title}</span>
+        </Link>
         <hr />
         <span className="postDate">
           {new Date().toDateString()}
         </span>
       </div>
-      <p className="postDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, repudiandae.</p>
+      <p className="postDesc">{props.desc}
+      </p>
     </div>
   );
 }

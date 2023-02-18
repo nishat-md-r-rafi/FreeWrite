@@ -1,5 +1,5 @@
 import Post from "../post/Post";
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import "./posts.css";
 import loadContentData from "../../redux/thunk/content/loadContent";
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { loadContent } from "../../redux/actions/contentActions";
 
 export default function Posts() {
 
-  const [contents, setContents] = useState([])
+  // const [contents, setContents] = useState([])
 
   const dispatch = useDispatch<any>()
   useEffect(() => {
@@ -18,19 +18,15 @@ export default function Posts() {
     
   }, [])
 
-  // const blogs = dispatch(loadContentData());
-  // console.log(contents)
+  const contents = useSelector((state:any) => state?.content[0]);
+  // console.log(contents);
 
   return (
     <div className="posts">
-      {/* {posts.map((p) => (
-      ))} */}
+      {contents?.map((p:any) => (
+       <Post {...p} key={p._id}/>
+      ))}
 
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
     </div>
   );
 }
