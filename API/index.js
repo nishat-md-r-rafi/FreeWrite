@@ -7,7 +7,7 @@ const category = require('./routes/category')
 const user = require('./routes/user')
 const cors = require('cors')
 
-dotenv.config()
+dotenv.config({ path: "./.env" })
 const app = express();
 const PORT = 5000 || process.env.PORT
 
