@@ -13,7 +13,7 @@ const PORT = 5000 || process.env.PORT
 
 
 
-mongoose.connect(process.env.URL)
+mongoose.connect("mongodb://0.0.0.0:27017/blogs")
                     .then(()=>{console.log("MongoDB is connected")})
                     .catch((err) => {console.log(err)})
 

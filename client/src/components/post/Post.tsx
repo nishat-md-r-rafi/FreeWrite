@@ -15,6 +15,10 @@ interface PostProps{
 export default function Post(props: PostProps) {
   console.log(props)
   const PF = "http://localhost:5000/images/";
+
+  const handleClick=()=>{
+    console.log("handleClick")
+  }
   return (
     <div className="post">
       {/* {post.photo && <img className="postImg" src={PF + post.photo} alt="" />} */}
@@ -26,7 +30,7 @@ export default function Post(props: PostProps) {
           ))}
         </div>
         <Link to={`/post/${props._id}`} className="link">
-          <span className="postTitle">{props.title}</span>
+          <span className="postTitle" >{props.title}</span>
         </Link>
         <hr />
         <span className="postDate">
